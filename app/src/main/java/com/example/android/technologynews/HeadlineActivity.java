@@ -7,6 +7,8 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.ListView;
 
@@ -20,9 +22,11 @@ public class HeadlineActivity extends AppCompatActivity implements
     private static final int HEADLINE_LOADER_ID = 1;
 
     // search urls
-    private static final String SAMPLE_URL = "https://content.guardianapis.com/search?api-key=c1a0ea4b-cb5b-4f89-86d4-d0636600e676";
+    private static final String QUERY_URL = "http://content.guardianapis.com/search?section=technology&order-by=newest&page-size=15&q=technology&api-key=c1a0ea4b-cb5b-4f89-86d4-d0636600e676";
 
+    private RecyclerView recyclerView;
     private HeadlineAdapter adapter;
+    private RecyclerView.LayoutManager layoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,9 +34,15 @@ public class HeadlineActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.headline_list);
 
-        ListView headlineListView = (ListView) findViewById(R.id.list);
-        adapter = new HeadlineAdapter(this, new ArrayList<Headline>());
-        headlineListView.setAdapter(adapter);
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+
+        // use a linear layout manager
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+
+        // specify an adapter
+        adapter = new HeadlineAdapter(new ArrayList<Headline>());
+        recyclerView.setAdapter(adapter);
 
         if (isConnected()){
             LoaderManager loaderManager = getLoaderManager();
@@ -54,7 +64,7 @@ public class HeadlineActivity extends AppCompatActivity implements
     @Override
     public Loader<List<Headline>> onCreateLoader(int i, Bundle bundle) {
         Log.i(LOG_TAG, "TEST: onCreateLoader");
-        return new HeadlineLoader(this, SAMPLE_URL);
+        return new HeadlineLoader(this, QUERY_URL);
     }
 
     @Override
