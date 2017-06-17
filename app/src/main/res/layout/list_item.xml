@@ -2,12 +2,25 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
     <TextView
         android:id="@+id/article_title_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="bkajs;hlkjaf" />
+        tools:text="@string/placeholder_title" />
+
+    <TextView
+        android:id="@+id/publications_date_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="@string/placeholder_publication_time" />
+
+    <TextView
+        android:id="@+id/section_name_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="tech" />
 
 </LinearLayout>

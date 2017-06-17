@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Tech News</string>
+    <string name="no_network_connection">It looks like you\'re not connected to the internet</string>
+    <string name="no_new_articles">There were no articles found</string>
+
+    <!-- Placeholder text for list items -->
+    <string name="placeholder_title">Worlds most advanced AI breaks free and soon will rule over
+        humans</string>
+    <string name="placeholder_publication_time">12:33, today</string>
 </resources>

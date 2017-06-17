@@ -10,7 +10,10 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,11 +25,18 @@ public class HeadlineActivity extends AppCompatActivity implements
     private static final int HEADLINE_LOADER_ID = 1;
 
     // search urls
-    private static final String QUERY_URL = "http://content.guardianapis.com/search?section=technology&order-by=newest&page-size=15&q=technology&api-key=c1a0ea4b-cb5b-4f89-86d4-d0636600e676";
+    private static final String QUERY_URL = "http://content.guardianapis.com/search?section=" +
+            "technology&order-by=newest&page-size=20&q=technology" +
+            "&api-key=c1a0ea4b-cb5b-4f89-86d4-d0636600e676";
 
+    // handle layout
     private RecyclerView recyclerView;
     private HeadlineAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
+
+    // handle empty screen
+    private TextView emptyStateTextView;
+    ProgressBar loadingIndicator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,22 +44,39 @@ public class HeadlineActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.headline_list);
 
+        // find views to later set visibility
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        emptyStateTextView = (TextView) findViewById(R.id.empty_state_text_view);
+        loadingIndicator = (ProgressBar) findViewById(R.id.loading_spinner);
 
-        // use a linear layout manager
+        // use a linear layout manager on the recyclerView
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        // specify an adapter
         adapter = new HeadlineAdapter(new ArrayList<Headline>());
         recyclerView.setAdapter(adapter);
 
         if (isConnected()){
+            loadingIndicator.setVisibility(View.VISIBLE);
             LoaderManager loaderManager = getLoaderManager();
             Log.i(LOG_TAG, "TEST: calling initLoader() from onCreate");
             loaderManager.initLoader(HEADLINE_LOADER_ID, null, this);
+        }else{
+            recyclerView.setVisibility(View.GONE);
+            loadingIndicator.setVisibility(View.GONE);
+            emptyStateTextView.setVisibility(View.VISIBLE);
+            emptyStateTextView.setText(R.string.no_network_connection);
         }
+
     }
+
+
+
+
+
+
+
+
 
     public boolean isConnected() {
         ConnectivityManager connectivityManager = (ConnectivityManager)
@@ -71,10 +98,13 @@ public class HeadlineActivity extends AppCompatActivity implements
     public void onLoadFinished(Loader<List<Headline>> loader, List<Headline> headlines) {
         Log.i(LOG_TAG, "TEST: onLoadFinished");
         adapter.clear();
+        loadingIndicator.setVisibility(View.GONE);
         // If there is a valid list of {@link Headline}s, then add them to the adapter's
         // data set. This will trigger the ListView to update.
         if (headlines != null && !headlines.isEmpty()) {
             adapter.addAll(headlines);
+        }else{
+            emptyStateTextView.setText(R.string.no_new_articles);
         }
     }
 
