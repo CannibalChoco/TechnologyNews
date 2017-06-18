@@ -2,9 +2,11 @@ package com.example.android.technologynews;
 
 import android.app.LoaderManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.Loader;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,12 +16,13 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class HeadlineActivity extends AppCompatActivity implements
-        LoaderManager.LoaderCallbacks<List<Headline>> {
+        LoaderManager.LoaderCallbacks<List<Headline>>, HeadlineAdapter.ListItemClickListener {
 
     private static final String LOG_TAG = HeadlineActivity.class.getName();
     private static final int HEADLINE_LOADER_ID = 1;
@@ -53,7 +56,9 @@ public class HeadlineActivity extends AppCompatActivity implements
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        adapter = new HeadlineAdapter(new ArrayList<Headline>());
+        recyclerView.setHasFixedSize(true);
+
+        adapter = new HeadlineAdapter(this, new ArrayList<Headline>(), this);
         recyclerView.setAdapter(adapter);
 
         if (isConnected()){
@@ -70,12 +75,18 @@ public class HeadlineActivity extends AppCompatActivity implements
 
     }
 
+    public void onListItemClick (int position) {
+        Headline currentHeadline = adapter.getItem(position);
+        openWebPage(currentHeadline.getUrl());
+    }
 
-
-
-
-
-
+    public void openWebPage(String url) {
+        Uri webpage = Uri.parse(url);
+        Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
+    }
 
 
     public boolean isConnected() {

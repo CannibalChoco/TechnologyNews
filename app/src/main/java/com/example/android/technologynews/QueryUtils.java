@@ -166,7 +166,7 @@ public class QueryUtils {
                 }
 
                 if(currentHeadline.has("webUrl")){
-                    webUrl = currentHeadline.getString("webTitle");
+                    webUrl = currentHeadline.getString("webUrl");
                 }
 
                 headlines.add(new Headline(title, webUrl));
