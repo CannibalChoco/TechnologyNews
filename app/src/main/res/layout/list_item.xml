@@ -1,28 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/item_container"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="16dp"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="@dimen/list_item_layout_size"
     android:orientation="vertical">
 
     <TextView
         android:id="@+id/article_title_text_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/article_title_layout_size"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:paddingBottom="@dimen/headline_padding"
+        android:gravity="bottom"
+        android:textColor="@color/textColorArticleHeadline"
+        android:textSize="@dimen/article_title_text_size"
         tools:text="@string/placeholder_title" />
 
-    <TextView
-        android:id="@+id/publications_date_text_view"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="@string/placeholder_publication_time" />
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/section_name_text_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:text="tech" />
+        <TextView
+            android:id="@+id/publications_date_text_view"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingLeft="@dimen/average_padding"
+            android:textColor="@color/textColorTime"
+            android:textSize="@dimen/other_text_size"
+            tools:text="@string/placeholder_publication_time" />
+
+        <TextView
+            android:id="@+id/section_name_text_view"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:paddingRight="@dimen/average_padding"
+            android:textSize="@dimen/other_text_size"
+            tools:text="Tech" />
+
+    </LinearLayout>
+
 
 </LinearLayout>

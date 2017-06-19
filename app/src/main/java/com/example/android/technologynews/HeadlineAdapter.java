@@ -20,7 +20,6 @@ public class HeadlineAdapter extends RecyclerView.Adapter<HeadlineAdapter.ViewHo
 
     private ArrayList<Headline> headlines;
     private Headline currentHeadline;
-    private Context context;
 
     // store a reference to listItemClickListener
     private static ListItemClickListener onClickListener;
@@ -31,10 +30,14 @@ public class HeadlineAdapter extends RecyclerView.Adapter<HeadlineAdapter.ViewHo
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView articleTitleTextView;
+        public TextView publicationTimeTextView;
+        public TextView sectionTextView;
 
         public ViewHolder(View view){
             super(view);
             articleTitleTextView = (TextView) view.findViewById(R.id.article_title_text_view);
+            publicationTimeTextView = (TextView) view.findViewById(R.id.publications_date_text_view);
+            sectionTextView = (TextView) view.findViewById(R.id.section_name_text_view);
             view.setOnClickListener(this);
         }
 
@@ -45,9 +48,8 @@ public class HeadlineAdapter extends RecyclerView.Adapter<HeadlineAdapter.ViewHo
         }
     }
 
-    public HeadlineAdapter(Context context, ArrayList<Headline> headline,
+    public HeadlineAdapter(ArrayList<Headline> headline,
                            ListItemClickListener listener) {
-        this.context = context;
         this.headlines = headline;
         onClickListener = listener;
     }
@@ -69,6 +71,8 @@ public class HeadlineAdapter extends RecyclerView.Adapter<HeadlineAdapter.ViewHo
         // - replace the contents of the view with that element
         currentHeadline = headlines.get(position);
         holder.articleTitleTextView.setText(currentHeadline.getHeadline());
+        holder.sectionTextView.setText(currentHeadline.getSectionName());
+        holder.publicationTimeTextView.setText(currentHeadline.getTime());
     }
 
     @Override
@@ -91,14 +95,6 @@ public class HeadlineAdapter extends RecyclerView.Adapter<HeadlineAdapter.ViewHo
     public void addAll(List<Headline> headlines){
         this.headlines.addAll(headlines);
         notifyDataSetChanged();
-    }
-
-    public void openWebPage(String url) {
-        Uri webpage = Uri.parse(url);
-        Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
-        if (intent.resolveActivity(context.getPackageManager()) != null) {
-            context.startActivity(intent);
-        }
     }
 
     public Headline getItem (int position){

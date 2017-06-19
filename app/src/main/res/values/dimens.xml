@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="average_padding">8dp</dimen>
+
+    <dimen name="headline_padding">8dp</dimen>
+
+    <dimen name="article_title_layout_size">56dp</dimen>
+    <dimen name="list_item_layout_size">96dp</dimen>
+
+    <dimen name="article_title_text_size">20sp</dimen>
+    <dimen name="other_text_size">12sp</dimen>
+
+</resources>

@@ -19,6 +19,8 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.L;
+
 
 public class QueryUtils {
 
@@ -160,6 +162,8 @@ public class QueryUtils {
                 JSONObject currentHeadline = resultsArray.getJSONObject(i);
                 String title = "";
                 String webUrl = "";
+                String sectionName = "";
+                String publicationTime = "";
 
                 if(currentHeadline.has("webTitle")){
                     title = currentHeadline.getString("webTitle");
@@ -169,9 +173,17 @@ public class QueryUtils {
                     webUrl = currentHeadline.getString("webUrl");
                 }
 
-                headlines.add(new Headline(title, webUrl));
+                if(currentHeadline.has("sectionName")){
+                    sectionName = currentHeadline.getString("sectionName");
+                }
+
+                if(currentHeadline.has("webPublicationDate")){
+                    publicationTime = currentHeadline.getString("webPublicationDate");
+                }
+
+                headlines.add(new Headline(title, webUrl, publicationTime, sectionName));
                 String data = headlines.toString();
-                Log.v("extractHeadlines", data);
+                Log.v("TEST: extractHeadlines", data);
             }
 
         } catch (JSONException e) {

@@ -58,7 +58,7 @@ public class HeadlineActivity extends AppCompatActivity implements
 
         recyclerView.setHasFixedSize(true);
 
-        adapter = new HeadlineAdapter(this, new ArrayList<Headline>(), this);
+        adapter = new HeadlineAdapter(new ArrayList<Headline>(), this);
         recyclerView.setAdapter(adapter);
 
         if (isConnected()){
