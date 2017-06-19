@@ -16,10 +16,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +43,6 @@ public class HeadlineActivity extends AppCompatActivity implements
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.i(LOG_TAG, "TEST: onCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.headline_list);
 
@@ -63,20 +60,19 @@ public class HeadlineActivity extends AppCompatActivity implements
         recyclerView.setAdapter(adapter);
 
         searchHeadlines();
-
     }
 
-    private void searchHeadlines (){
-        if (isConnected()){
+    private void searchHeadlines() {
+        if (isConnected()) {
             loadingIndicator.setVisibility(View.VISIBLE);
             LoaderManager loaderManager = getLoaderManager();
             Log.i(LOG_TAG, "TEST: calling initLoader()");
-            if(loaderManager != null){
+            if (loaderManager != null) {
                 getLoaderManager().restartLoader(HEADLINE_LOADER_ID, null, this);
-            }else{
+            } else {
                 loaderManager.initLoader(HEADLINE_LOADER_ID, null, this);
             }
-        }else{
+        } else {
             recyclerView.setVisibility(View.GONE);
             loadingIndicator.setVisibility(View.GONE);
             emptyStateTextView.setVisibility(View.VISIBLE);
@@ -107,7 +103,7 @@ public class HeadlineActivity extends AppCompatActivity implements
         return super.onOptionsItemSelected(item);
     }
 
-    public void onListItemClick (int position) {
+    public void onListItemClick(int position) {
         Headline currentHeadline = adapter.getItem(position);
         openWebPage(currentHeadline.getUrl());
     }
@@ -133,13 +129,11 @@ public class HeadlineActivity extends AppCompatActivity implements
 
     @Override
     public Loader<List<Headline>> onCreateLoader(int i, Bundle bundle) {
-        Log.i(LOG_TAG, "TEST: onCreateLoader");
         return new HeadlineLoader(this, QUERY_URL);
     }
 
     @Override
     public void onLoadFinished(Loader<List<Headline>> loader, List<Headline> headlines) {
-        Log.i(LOG_TAG, "TEST: onLoadFinished");
         adapter.clear();
         loadingIndicator.setVisibility(View.GONE);
         // If there is a valid list of {@link Headline}s, then add them to the adapter's
@@ -148,14 +142,13 @@ public class HeadlineActivity extends AppCompatActivity implements
             adapter.addAll(headlines);
             emptyStateTextView.setVisibility(View.GONE);
             recyclerView.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             emptyStateTextView.setText(R.string.no_new_articles);
         }
     }
 
     @Override
     public void onLoaderReset(Loader<List<Headline>> loader) {
-        Log.i(LOG_TAG, "TEST: onLoaderReset");
         //queryUrl = null;
         adapter.clear();
     }

@@ -7,7 +7,7 @@ public class Headline {
     private String time;
     private String sectionName;
 
-    public Headline(String headline, String url, String date, String sectionName){
+    public Headline(String headline, String url, String date, String sectionName) {
         this.headline = headline;
         this.url = url;
         this.time = date;

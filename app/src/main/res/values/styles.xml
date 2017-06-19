@@ -8,4 +8,59 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="CardViewStyle">
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginRight">@dimen/small_padding</item>
+        <item name="android:layout_marginLeft">@dimen/small_padding</item>
+    </style>
+
+    <style name="TitleTextViewStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:gravity">bottom</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:paddingBottom">@dimen/small_padding</item>
+        <item name="android:textColor">@color/colorAtricleHeadlineText</item>
+        <item name="android:textSize">@dimen/article_title_text_size</item>
+    </style>
+
+    <style name="PublicationDateTextViewStyle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:paddingLeft">@dimen/big_padding</item>
+        <item name="android:textColor">@color/colorTimeText</item>
+        <item name="android:textSize">@dimen/other_text_size</item>
+    </style>
+
+    <style name="SectionNameTextViewStyle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:gravity">right</item>
+        <item name="android:paddingRight">@dimen/big_padding</item>
+        <item name="android:textColor">@color/colorSectionText</item>
+        <item name="android:textSize">@dimen/other_text_size</item>
+    </style>
+
+    <style name="EmptyStateTextViewStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:visibility">gone</item>
+    </style>
+
+    <style name="RecyclerViewStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:scrollbars">vertical</item>
+    </style>
+
 </resources>

@@ -13,7 +13,7 @@ public class HeadlineLoader extends AsyncTaskLoader<List<Headline>> {
     // Query URL
     private String url;
 
-    public HeadlineLoader(Context context, String url){
+    public HeadlineLoader(Context context, String url) {
         //call the super class constructor
         super(context);
         this.url = url;
@@ -21,14 +21,12 @@ public class HeadlineLoader extends AsyncTaskLoader<List<Headline>> {
 
     @Override
     protected void onStartLoading() {
-        Log.i(LOG_TAG, "TEST: onStartLoading");
-        // good practice to put forceLoad() whithin the loader subclass
+        // good practice to put forceLoad() within the loader subclass
         forceLoad();
     }
 
     @Override
     public List<Headline> loadInBackground() {
-        Log.i(LOG_TAG, "TEST: loadInBackground");
         // Don't perform the request if there are no URLs, or the first URL is null.
         if (url == null) {
             return null;

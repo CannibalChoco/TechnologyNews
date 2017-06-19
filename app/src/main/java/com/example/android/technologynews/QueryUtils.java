@@ -19,16 +19,18 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.L;
-
 
 public class QueryUtils {
 
     private static final String LOG_TAG = QueryUtils.class.getName();
-    public static final int URL_READ_TIMEOUT = 10000; /* milliseconds */
-    public static final int URL_CONNECT_TIMEOUT = 15000; /* milliseconds */
-    public static final int URL_RESPONSE_OK = 200;
+    private static final int URL_READ_TIMEOUT = 10000; /* milliseconds */
+    private static final int URL_CONNECT_TIMEOUT = 15000; /* milliseconds */
+    private static final int URL_RESPONSE_OK = 200;
 
+    private static final String WEB_TITLE = "webTitle";
+    private static final String WEB_URL = "webUrl";
+    private static final String SECTION_NAME = "sectionName";
+    private static final String WEB_PUBLICATION_DATE = "webPublicationDate";
 
     /**
      * Create a private constructor because no one should ever create a {@link QueryUtils} object.
@@ -42,7 +44,6 @@ public class QueryUtils {
      * Query the api dataset and return a list of {@link Headline} objects
      */
     public static List<Headline> fetchHeadlineData(String requestUrl) {
-        Log.i(LOG_TAG, "TEST: fetchHeadlineData");
         // Create URL object
         URL url = createUrl(requestUrl);
 
@@ -65,7 +66,6 @@ public class QueryUtils {
      * Returns new URL object from the given string URL.
      */
     private static URL createUrl(String stringUrl) {
-        Log.i(LOG_TAG, "TEST: createUrl");
         URL url = null;
         try {
             url = new URL(stringUrl);
@@ -79,7 +79,6 @@ public class QueryUtils {
      * Make an HTTP request to the given URL and return a String as the response.
      */
     private static String makeHttpRequest(URL url) throws IOException {
-        Log.i(LOG_TAG, "TEST: makeHttpRequest");
         String jsonResponse = "";
 
         // If the URL is null, then return early.
@@ -122,7 +121,6 @@ public class QueryUtils {
      * whole JSON response from the server.
      */
     private static String readFromStream(InputStream inputStream) throws IOException {
-        Log.i(LOG_TAG, "TEST: readFromStream");
         StringBuilder output = new StringBuilder();
         if (inputStream != null) {
             InputStreamReader inputStreamReader = new InputStreamReader(inputStream, Charset.forName("UTF-8"));
@@ -141,7 +139,6 @@ public class QueryUtils {
      * parsing a JSON response.
      */
     public static List<Headline> extractHeadlinesFromJson(String headlineJsonResponse) {
-        Log.i(LOG_TAG, "TEST: extractHeadlinesFromJson");
         // If the JSON string is empty or null, then return early.
         if (TextUtils.isEmpty(headlineJsonResponse)) {
             return null;
@@ -165,25 +162,24 @@ public class QueryUtils {
                 String sectionName = "";
                 String publicationTime = "";
 
-                if(currentHeadline.has("webTitle")){
-                    title = currentHeadline.getString("webTitle");
+                if (currentHeadline.has(WEB_TITLE)) {
+                    title = currentHeadline.getString(WEB_TITLE);
                 }
 
-                if(currentHeadline.has("webUrl")){
-                    webUrl = currentHeadline.getString("webUrl");
+                if (currentHeadline.has(WEB_URL)) {
+                    webUrl = currentHeadline.getString(WEB_URL);
                 }
 
-                if(currentHeadline.has("sectionName")){
-                    sectionName = currentHeadline.getString("sectionName");
+                if (currentHeadline.has(SECTION_NAME)) {
+                    sectionName = currentHeadline.getString(SECTION_NAME);
                 }
 
-                if(currentHeadline.has("webPublicationDate")){
-                    publicationTime = currentHeadline.getString("webPublicationDate");
+                if (currentHeadline.has(WEB_PUBLICATION_DATE)) {
+                    publicationTime = currentHeadline.getString(WEB_PUBLICATION_DATE);
                 }
 
                 headlines.add(new Headline(title, webUrl, publicationTime, sectionName));
                 String data = headlines.toString();
-                Log.v("TEST: extractHeadlines", data);
             }
 
         } catch (JSONException e) {

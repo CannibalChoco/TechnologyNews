@@ -1,17 +1,12 @@
 package com.example.android.technologynews;
 
 
-import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -39,7 +34,7 @@ public class HeadlineAdapter extends RecyclerView.Adapter<HeadlineAdapter.ViewHo
         public TextView publicationTimeTextView;
         public TextView sectionTextView;
 
-        public ViewHolder(View view){
+        public ViewHolder(View view) {
             super(view);
             articleTitleTextView = (TextView) view.findViewById(R.id.article_title_text_view);
             publicationTimeTextView = (TextView) view.findViewById(R.id.publications_date_text_view);
@@ -88,7 +83,7 @@ public class HeadlineAdapter extends RecyclerView.Adapter<HeadlineAdapter.ViewHo
      * @param sourceDate the date extracted from data set
      * @return formatted date and time
      */
-    private String formatDate (String sourceDate){
+    private String formatDate(String sourceDate) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:SS'Z'");
         Date newDate = null;
         try {
@@ -109,7 +104,7 @@ public class HeadlineAdapter extends RecyclerView.Adapter<HeadlineAdapter.ViewHo
     /**
      * Clear the adapter
      */
-    public void clear(){
+    public void clear() {
         int size = this.headlines.size();
         this.headlines.clear();
         notifyItemRangeRemoved(0, size);
@@ -118,12 +113,12 @@ public class HeadlineAdapter extends RecyclerView.Adapter<HeadlineAdapter.ViewHo
     /**
      * adds all headlines to the adapter
      */
-    public void addAll(List<Headline> headlines){
+    public void addAll(List<Headline> headlines) {
         this.headlines.addAll(headlines);
         notifyDataSetChanged();
     }
 
-    public Headline getItem (int position){
+    public Headline getItem(int position) {
         return headlines.get(position);
     }
 }
