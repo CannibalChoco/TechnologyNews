@@ -28,9 +28,8 @@ public class HeadlineActivity extends AppCompatActivity implements
     private static final int HEADLINE_LOADER_ID = 1;
 
     // search urls
-    private static final String QUERY_URL = "http://content.guardianapis.com/search?section=" +
-            "technology&order-by=newest&page-size=20&q=technology" +
-            "&api-key=c1a0ea4b-cb5b-4f89-86d4-d0636600e676";
+    private static final String QUERY_URL = "http://content.guardianapis.com/search?" +
+            "order-by=newest&page-size=20&q=technology&api-key=c1a0ea4b-cb5b-4f89-86d4-d0636600e676";
 
     // handle layout
     private RecyclerView recyclerView;

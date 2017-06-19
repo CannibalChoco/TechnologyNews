@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <!-- Primary color of the app (shown in the app bar) -->
+    <color name="colorPrimary">#2B3D4D</color>
 
-    <!-- Text color for the details of the earthquake in the list item -->
+    <!-- Primary dark color of the app (shown in the status bar) -->
+    <color name="colorPrimaryDark">#23303D</color>
+
+    <color name="colorAccent">#00B0FF</color>
+
+    <!-- Primary dark color of the app (shown in the status bar) -->
+    <color name="colorBackground">#BDBDBD</color>
+
+    <!-- Text color for publishing time -->
     <color name="textColorTime">#B4BAC0</color>
 
-    <!-- Text color for the primary location of the earthquake in the list item -->
+    <!-- Text color for publishing time -->
+    <color name="textColorSection">#01579B</color>
+
+    <!-- Text color for the articles headline -->
     <color name="textColorArticleHeadline">#2B3D4D</color>
 </resources>
