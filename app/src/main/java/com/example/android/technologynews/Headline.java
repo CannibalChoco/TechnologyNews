@@ -29,4 +29,5 @@ public class Headline {
     public String getSectionName() {
         return sectionName;
     }
+
 }

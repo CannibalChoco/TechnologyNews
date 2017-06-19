@@ -13,8 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginRight="@dimen/small_padding"
-        android:layout_marginLeft="@dimen/small_padding"
-        card_view:cardCornerRadius="4dp">
+        android:layout_marginLeft="@dimen/small_padding">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -31,7 +30,7 @@
                 android:gravity="bottom"
                 android:maxLines="2"
                 android:paddingBottom="@dimen/small_padding"
-                android:textColor="@color/textColorArticleHeadline"
+                android:textColor="@color/colorAtricleHeadlineText"
                 android:textSize="@dimen/article_title_text_size"
                 tools:text="@string/placeholder_title" />
 
@@ -48,7 +47,7 @@
                     android:ellipsize="end"
                     android:maxLines="1"
                     android:paddingLeft="@dimen/big_padding"
-                    android:textColor="@color/textColorTime"
+                    android:textColor="@color/colorTimeText"
                     android:textSize="@dimen/other_text_size"
                     tools:text="@string/placeholder_publication_time" />
 
@@ -61,7 +60,7 @@
                     android:maxLines="1"
                     android:gravity="right"
                     android:paddingRight="@dimen/big_padding"
-                    android:textColor="@color/textColorSection"
+                    android:textColor="@color/colorSectionText"
                     android:textSize="@dimen/other_text_size"
                     tools:text="Tech" />
 

@@ -7,4 +7,6 @@
     <string name="placeholder_title">Worlds most advanced AI breaks free and soon will rule over
         humans</string>
     <string name="placeholder_publication_time">12:33, today</string>
+
+    <string name="menu_refresh">Refresh</string>
 </resources>

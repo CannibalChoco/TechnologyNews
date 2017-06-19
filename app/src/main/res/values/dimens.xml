@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- sizes for paddings an margins -->
     <dimen name="small_padding">4dp</dimen>
-
     <dimen name="average_padding">8dp</dimen>
-
     <dimen name="big_padding">16dp</dimen>
 
+    <!-- TextView text sizes -->
     <dimen name="article_title_text_size">20sp</dimen>
     <dimen name="other_text_size">12sp</dimen>
 

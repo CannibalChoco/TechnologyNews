@@ -12,6 +12,9 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -60,10 +63,15 @@ public class HeadlineActivity extends AppCompatActivity implements
         adapter = new HeadlineAdapter(new ArrayList<Headline>(), this);
         recyclerView.setAdapter(adapter);
 
+        searchHeadlines();
+
+    }
+
+    private void searchHeadlines (){
         if (isConnected()){
             loadingIndicator.setVisibility(View.VISIBLE);
             LoaderManager loaderManager = getLoaderManager();
-            Log.i(LOG_TAG, "TEST: calling initLoader() from onCreate");
+            Log.i(LOG_TAG, "TEST: calling initLoader()");
             loaderManager.initLoader(HEADLINE_LOADER_ID, null, this);
         }else{
             recyclerView.setVisibility(View.GONE);
@@ -71,7 +79,29 @@ public class HeadlineActivity extends AppCompatActivity implements
             emptyStateTextView.setVisibility(View.VISIBLE);
             emptyStateTextView.setText(R.string.no_network_connection);
         }
+    }
 
+    /**
+     * Inflate the options menu
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    /**
+     * Respond when users click on menu item
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.menu_refresh) {
+            searchHeadlines();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void onListItemClick (int position) {
@@ -110,7 +140,7 @@ public class HeadlineActivity extends AppCompatActivity implements
         adapter.clear();
         loadingIndicator.setVisibility(View.GONE);
         // If there is a valid list of {@link Headline}s, then add them to the adapter's
-        // data set. This will trigger the ListView to update.
+        // data set. This will trigger the RecyclerView to update.
         if (headlines != null && !headlines.isEmpty()) {
             adapter.addAll(headlines);
         }else{

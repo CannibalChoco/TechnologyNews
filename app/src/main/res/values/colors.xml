@@ -12,11 +12,12 @@
     <color name="colorBackground">#BDBDBD</color>
 
     <!-- Text color for publishing time -->
-    <color name="textColorTime">#B4BAC0</color>
+    <color name="colorTimeText">#546E7A</color>
 
     <!-- Text color for publishing time -->
-    <color name="textColorSection">#01579B</color>
+    <color name="colorSectionText">#01579B</color>
 
     <!-- Text color for the articles headline -->
-    <color name="textColorArticleHeadline">#2B3D4D</color>
+    <color name="colorAtricleHeadlineText">#2B3D4D</color>
+
 </resources>
