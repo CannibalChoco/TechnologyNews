@@ -30,7 +30,7 @@ public class HeadlineActivity extends AppCompatActivity implements
     private static final String LOG_TAG = HeadlineActivity.class.getName();
     private static final int HEADLINE_LOADER_ID = 1;
 
-    // search urls
+    // search url
     private static final String QUERY_URL = "http://content.guardianapis.com/search?" +
             "order-by=newest&page-size=20&q=technology&api-key=c1a0ea4b-cb5b-4f89-86d4-d0636600e676";
 
@@ -57,7 +57,6 @@ public class HeadlineActivity extends AppCompatActivity implements
         // use a linear layout manager on the recyclerView
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-
         recyclerView.setHasFixedSize(true);
 
         adapter = new HeadlineAdapter(new ArrayList<Headline>(), this);
@@ -72,7 +71,11 @@ public class HeadlineActivity extends AppCompatActivity implements
             loadingIndicator.setVisibility(View.VISIBLE);
             LoaderManager loaderManager = getLoaderManager();
             Log.i(LOG_TAG, "TEST: calling initLoader()");
-            loaderManager.initLoader(HEADLINE_LOADER_ID, null, this);
+            if(loaderManager != null){
+                getLoaderManager().restartLoader(HEADLINE_LOADER_ID, null, this);
+            }else{
+                loaderManager.initLoader(HEADLINE_LOADER_ID, null, this);
+            }
         }else{
             recyclerView.setVisibility(View.GONE);
             loadingIndicator.setVisibility(View.GONE);
@@ -143,6 +146,8 @@ public class HeadlineActivity extends AppCompatActivity implements
         // data set. This will trigger the RecyclerView to update.
         if (headlines != null && !headlines.isEmpty()) {
             adapter.addAll(headlines);
+            emptyStateTextView.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.VISIBLE);
         }else{
             emptyStateTextView.setText(R.string.no_new_articles);
         }
