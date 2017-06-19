@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,11 +13,16 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
 public class HeadlineAdapter extends RecyclerView.Adapter<HeadlineAdapter.ViewHolder> {
+
+    private static final String LOG_TAG = HeadlineAdapter.class.getName();
 
     private ArrayList<Headline> headlines;
     private Headline currentHeadline;
@@ -70,9 +76,29 @@ public class HeadlineAdapter extends RecyclerView.Adapter<HeadlineAdapter.ViewHo
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         currentHeadline = headlines.get(position);
+        String date = formatDate(currentHeadline.getTime());
         holder.articleTitleTextView.setText(currentHeadline.getHeadline());
         holder.sectionTextView.setText(currentHeadline.getSectionName());
-        holder.publicationTimeTextView.setText(currentHeadline.getTime());
+        holder.publicationTimeTextView.setText(date);
+    }
+
+    /**
+     * Formats ISO 8601 to MMM dd, yyyy hh:mm
+     *
+     * @param sourceDate the date extracted from data set
+     * @return formatted date and time
+     */
+    private String formatDate (String sourceDate){
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:SS'Z'");
+        Date newDate = null;
+        try {
+            newDate = format.parse(sourceDate);
+        } catch (ParseException e) {
+            Log.e(LOG_TAG, "parsing inputDate: " + sourceDate, e);
+        }
+        format = new SimpleDateFormat("MMM dd, yyyy hh:mm");
+
+        return format.format(newDate);
     }
 
     @Override
