@@ -108,7 +108,7 @@ public class HeadlineActivity extends AppCompatActivity implements
         openWebPage(currentHeadline.getUrl());
     }
 
-    public void openWebPage(String url) {
+    private void openWebPage(String url) {
         Uri webpage = Uri.parse(url);
         Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
         if (intent.resolveActivity(getPackageManager()) != null) {

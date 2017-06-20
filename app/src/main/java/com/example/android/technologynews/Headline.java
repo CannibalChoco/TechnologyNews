@@ -2,10 +2,10 @@ package com.example.android.technologynews;
 
 
 public class Headline {
-    private String headline;
-    private String url;
-    private String time;
-    private String sectionName;
+    private final String headline;
+    private final String url;
+    private final String time;
+    private final String sectionName;
 
     public Headline(String headline, String url, String date, String sectionName) {
         this.headline = headline;
